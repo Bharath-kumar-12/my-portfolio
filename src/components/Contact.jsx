@@ -47,9 +47,9 @@ function Contact() {
 
       {/* Social Links */}
       <div className="flex justify-center gap-8 mt-12 text-gray-400">
-        <a href="#" className="hover:text-yellow-400 transition">GitHub</a>
-        <a href="#" className="hover:text-yellow-400 transition">LinkedIn</a>
-        <a href="#" className="hover:text-yellow-400 transition">Twitter</a>
+        <a href="https://github.com" className="hover:text-yellow-400 transition">GitHub</a>
+        <a href="https://linkedin.com" className="hover:text-yellow-400 transition">LinkedIn</a>
+        <a href="https://twitter.com" className="hover:text-yellow-400 transition">Twitter</a>
       </div>
 
     </section>

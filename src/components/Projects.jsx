@@ -15,7 +15,7 @@ function Projects() {
             <span className="bg-yellow-400 text-black text-xs font-bold px-3 py-1 rounded-full">React</span>
             <span className="bg-yellow-400 text-black text-xs font-bold px-3 py-1 rounded-full">Tailwind</span>
           </div>
-          <a href="#" className="text-yellow-400 font-medium hover:underline">View Project</a>
+          <a href="https://github.com" className="text-yellow-400 font-medium hover:underline">View Project</a>
         </div>
 
         <div className="bg-black border border-zinc-700 rounded-2xl p-6 hover:border-yellow-400 transition duration-300">
@@ -25,7 +25,7 @@ function Projects() {
             <span className="bg-yellow-400 text-black text-xs font-bold px-3 py-1 rounded-full">React</span>
             <span className="bg-yellow-400 text-black text-xs font-bold px-3 py-1 rounded-full">Node.js</span>
           </div>
-          <a href="#" className="text-yellow-400 font-medium hover:underline">View Project</a>
+          <a href="https://github.com" className="text-yellow-400 font-medium hover:underline">View Project</a>
         </div>
 
         <div className="bg-black border border-zinc-700 rounded-2xl p-6 hover:border-yellow-400 transition duration-300">
@@ -35,7 +35,7 @@ function Projects() {
             <span className="bg-yellow-400 text-black text-xs font-bold px-3 py-1 rounded-full">React</span>
             <span className="bg-yellow-400 text-black text-xs font-bold px-3 py-1 rounded-full">API</span>
           </div>
-          <a href="#" className="text-yellow-400 font-medium hover:underline">View Project</a>
+          <a href="https://github.com" className="text-yellow-400 font-medium hover:underline">View Project</a>
         </div>
 
       </div>
