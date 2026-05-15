@@ -176,8 +176,9 @@ function Contact() {
 
         <div ref={formRef} className="reveal grid grid-cols-1 md:grid-cols-5 gap-8 max-w-5xl mx-auto">
 
-          {/* ── Left info panel ── */}
+          {/* {Left info panel} */}
           <div className="md:col-span-2 flex flex-col gap-5">
+            {/* {Contact info card} */}
             <div className="neon-card" style={{ padding: '1.75rem', flex: 1 }}>
               <h3 style={{ fontFamily: 'Syne, sans-serif', fontWeight: 700, fontSize: '1.2rem', marginBottom: '0.5rem' }}>
                 Let's build something great
@@ -313,7 +314,8 @@ function Contact() {
                     border: '1px solid rgba(245,158,11,0.2)',
                     borderRadius: 10, padding: '0.5rem 1rem',
                   }}>
-                    ⚠️ EmailJS not configured yet. Add your keys to Contact.jsx
+                    {/* Warning wrapper */}
+                    {"⚠️ EmailJS not configured yet. Add your keys to Contact.jsx"}
                   </p>
                 )}
               </form>
