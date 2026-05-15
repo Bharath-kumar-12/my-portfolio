@@ -97,7 +97,7 @@ function Contact() {
       <div style={{ position: 'absolute', top: '10%', right: '15%', width: 350, height: 350, background: 'radial-gradient(circle, rgba(236,72,153,0.1) 0%, transparent 70%)', filter: 'blur(80px)', pointerEvents: 'none' }} />
       <div className="max-w-6xl mx-auto">
         <div ref={titleRef} className="reveal text-center mb-16">
-          <span className="section-label">// let's connect</span>
+          <span className="section-label">{"// let's connect"}</span>
           <h2 style={{ fontFamily: 'Syne, sans-serif', fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 800, letterSpacing: '-0.03em' }}>Get In <span className="gradient-text">Touch</span></h2>
           <p style={{ color: 'rgba(255,255,255,0.4)', marginTop: '0.75rem', fontSize: '0.95rem' }}>Got a project? Let's make something amazing together 🚀</p>
         </div>

@@ -27,7 +27,7 @@ function Navbar() {
     >
       <div className="max-w-6xl mx-auto flex justify-between items-center">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2 group">
+        <a href="/" className="flex items-center gap-2 group">
           <div
             className="w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold"
             style={{

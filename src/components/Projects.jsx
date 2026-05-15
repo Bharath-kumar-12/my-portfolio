@@ -177,7 +177,7 @@ function Projects() {
 
       <div className="max-w-6xl mx-auto">
         <div ref={titleRef} className="reveal text-center mb-16">
-          <span className="section-label">// my work</span>
+          <span className="section-label">{"// my work"}</span>
           <h2 style={{
             fontFamily:'Syne,sans-serif',fontSize:'clamp(2rem,5vw,3.5rem)',
             fontWeight:800,letterSpacing:'-0.03em',

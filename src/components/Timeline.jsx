@@ -87,7 +87,7 @@ export default function Timeline() {
       <div style={{ position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)', width: 400, height: 400, background: 'radial-gradient(circle,rgba(168,85,247,0.07) 0%,transparent 70%)', filter: 'blur(80px)', pointerEvents: 'none' }} />
       <div className="max-w-5xl mx-auto">
         <div ref={titleRef} className="reveal text-center mb-20">
-          <span className="section-label">// my journey</span>
+          <span className="section-label">{"// my journey"}</span>
           <h2 style={{ fontFamily: 'Syne,sans-serif', fontSize: 'clamp(2rem,5vw,3.5rem)', fontWeight: 800, letterSpacing: '-0.03em' }}>The <span className="gradient-text">Timeline</span></h2>
           <p style={{ color: 'rgba(255,255,255,0.4)', marginTop: '0.75rem', fontSize: '0.95rem' }}>Every great story has a beginning 📖</p>
         </div>

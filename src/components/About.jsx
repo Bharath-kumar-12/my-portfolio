@@ -10,7 +10,6 @@ function useReveal(ref, delay=0) {
   },[ref,delay]);
 }
 
-/* ─── Live Clock (Chennai / IST) ─────────────────────── */
 function LiveClock() {
   const [time, setTime] = useState('');
   const [date, setDate] = useState('');
@@ -38,7 +37,7 @@ function LiveClock() {
         {date} · IST
       </div>
       <div style={{
-        display:'flex',alignItems:'center',justifyContent:'center',gap:5,
+        display:'center',alignItems:'center',justifyContent:'center',gap:5,
         marginTop:6,fontSize:'0.7rem',color:'#06b6d4',
         fontFamily:'JetBrains Mono,monospace',letterSpacing:'0.08em',
       }}>
@@ -53,7 +52,6 @@ function LiveClock() {
   );
 }
 
-/* ─── Tilt Photo ─────────────────────────────────────── */
 function TiltPhoto() {
   const ref = useRef(null);
   const [tilt, setTilt] = useState({rx:0,ry:0});
@@ -78,7 +76,6 @@ function TiltPhoto() {
           willChange:'transform',
         }}
       >
-        {/* Corner accents */}
         {[{top:-10,left:-10},{top:-10,right:-10},{bottom:-10,left:-10},{bottom:-10,right:-10}].map((pos,i)=>(
           <div key={i} style={{
             position:'absolute',...pos,width:22,height:22,
@@ -86,8 +83,6 @@ function TiltPhoto() {
             borderColor:i%2===0?'#a855f7':'#06b6d4',
           }}/>
         ))}
-
-        {/* Photo */}
         <div className="pulse-glow" style={{
           width:300,height:300,borderRadius:24,overflow:'hidden',
           border:'1px solid rgba(168,85,247,0.3)',position:'relative',
@@ -97,7 +92,6 @@ function TiltPhoto() {
             alt="Bharath"
             style={{width:'100%',height:'100%',objectFit:'cover'}}
           />
-          {/* shine */}
           <div style={{
             position:'absolute',inset:0,
             background:`radial-gradient(circle at ${sh.x}% ${sh.y}%,rgba(255,255,255,0.12) 0%,transparent 60%)`,
@@ -108,8 +102,6 @@ function TiltPhoto() {
             background:'linear-gradient(to top,rgba(5,5,16,0.5) 0%,transparent 50%)',
           }}/>
         </div>
-
-        {/* Floating badge */}
         <div className="neon-card" style={{
           position:'absolute',bottom:-18,right:-18,
           padding:'0.6rem 0.875rem',
@@ -124,8 +116,6 @@ function TiltPhoto() {
             Available
           </span>
         </div>
-
-        {/* XP badge */}
         <div className="neon-card" style={{
           position:'absolute',top:-18,right:-18,
           padding:'0.5rem 0.75rem',
@@ -166,7 +156,7 @@ function About() {
 
       <div className="max-w-6xl mx-auto">
         <div ref={secRef} className="reveal text-center mb-16">
-          <span className="section-label">// about me</span>
+          <span className="section-label">{"// about me"}</span>
           <h2 style={{
             fontFamily:'Syne,sans-serif',fontSize:'clamp(2rem,5vw,3.5rem)',
             fontWeight:800,letterSpacing:'-0.03em',
