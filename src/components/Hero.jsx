@@ -103,22 +103,44 @@ function Constellation() {
   return <canvas ref={cvs} style={{position:'absolute',inset:0,width:'100%',height:'100%',pointerEvents:'none',zIndex:0}}/>;
 }
 
-/* ─── Aurora Blobs ────────────────────────────────────── */
-function Aurora() {
+/* ─── Floating Tech Icons (3D Parallax) ───────────────── */
+function FloatingIcons() {
+  const icons = [
+    { txt:'⚛️', x:15, y:20, s:0.8 },
+    { txt:'⚡', x:85, y:15, s:1.2 },
+    { txt:'🎨', x:10, y:75, s:1.0 },
+    { txt:'🚀', x:90, y:80, s:0.9 },
+    { txt:'🔥', x:75, y:30, s:1.1 },
+  ];
   return (
-    <div style={{position:'absolute',inset:0,overflow:'hidden',pointerEvents:'none',zIndex:0}}>
-      {[
-        {top:'-20%',left:'-10%',  w:700,h:600, c:'rgba(168,85,247,0.18)', anim:'auroraBlob1 14s ease-in-out infinite'},
-        {top:'5%',  right:'-15%', w:650,h:550, c:'rgba(6,182,212,0.14)',  anim:'auroraBlob2 17s ease-in-out infinite'},
-        {bottom:'0',left:'25%',   w:550,h:550, c:'rgba(236,72,153,0.1)',  anim:'auroraBlob3 11s ease-in-out infinite'},
-      ].map((b,i)=>(
+    <div style={{ position:'absolute', inset:0, pointerEvents:'none', zIndex:1 }}>
+      {icons.map((ic, i) => (
         <div key={i} style={{
-          position:'absolute',top:b.top,left:b.left,right:b.right,bottom:b.bottom,
-          width:b.w,height:b.h,borderRadius:'50%',
-          background:`radial-gradient(ellipse,${b.c} 0%,transparent 70%)`,
-          filter:'blur(90px)',animation:b.anim,
-        }}/>
+          position:'absolute', left:`${ic.x}%`, top:`${ic.y}%`,
+          fontSize:`${2 * ic.s}rem`, filter:'blur(2px)', opacity:0.15,
+          animation:`float ${4 + i}s ease-in-out infinite`,
+          animationDelay:`${i * 0.5}s`,
+        }}>
+          {ic.txt}
+        </div>
       ))}
+    </div>
+  );
+}
+
+/* ─── Aurora Mesh Gradient ────────────────────────────── */
+function AuroraMesh() {
+  return (
+    <div style={{ position:'absolute', inset:0, background:'var(--bg-dark)', overflow:'hidden', pointerEvents:'none' }}>
+      <div style={{
+        position:'absolute', width:'150%', height:'150%', top:'-25%', left:'-25%',
+        background:`
+          radial-gradient(circle at 20% 30%, rgba(168,85,247,0.15) 0%, transparent 40%),
+          radial-gradient(circle at 80% 70%, rgba(6,182,212,0.15) 0%, transparent 40%),
+          radial-gradient(circle at 50% 50%, rgba(236,72,153,0.1) 0%, transparent 50%)
+        `,
+        filter:'blur(100px)', animation:'auroraBlob1 20s linear infinite',
+      }} />
     </div>
   );
 }
@@ -316,7 +338,8 @@ export default function Hero(){
     <section className="min-h-screen flex items-center px-6 relative overflow-hidden mesh-bg"
       style={{background:'var(--bg-dark)'}}>
 
-      <Aurora/>
+      <AuroraMesh/>
+      <FloatingIcons/>
       <Constellation/>
       <PerspGrid/>
       <CodeRain/>

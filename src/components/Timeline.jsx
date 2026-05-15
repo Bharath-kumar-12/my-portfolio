@@ -50,73 +50,21 @@ function TimelineCard({ item, idx }) {
   const isRight = item.side === 'right';
 
   return (
-    <div ref={ref} className="reveal" style={{
-      display: 'flex',
-      justifyContent: isRight ? 'flex-end' : 'flex-start',
-      paddingLeft: isRight ? '52%' : 0,
-      paddingRight: isRight ? 0 : '52%',
-      marginBottom: '3rem',
-      position: 'relative',
-    }}>
-      {/* Center dot */}
-      <div style={{
-        position: 'absolute', left: '50%', top: '1.5rem',
-        transform: 'translate(-50%, -50%)',
-        width: 14, height: 14, borderRadius: '50%',
-        background: item.color,
-        boxShadow: `0 0 16px ${item.color}, 0 0 32px ${item.color}80`,
-        zIndex: 2,
-        border: '2px solid var(--bg-dark)',
-      }} />
-
-      {/* Year badge on opposite side */}
-      <div style={{
-        position: 'absolute',
-        left: isRight ? 'calc(50% - 90px)' : 'calc(50% + 16px)',
-        top: '0.75rem',
-        fontFamily: 'JetBrains Mono,monospace', fontWeight: 700, fontSize: '0.8rem',
-        color: item.color, letterSpacing: '0.1em',
-        padding: '0.25rem 0.75rem',
-        background: `${item.color}15`,
-        border: `1px solid ${item.color}40`,
-        borderRadius: 100,
-      }}>{item.year}</div>
-
-      {/* Card */}
-      <div className="neon-card" style={{
-        padding: '1.5rem',
-        maxWidth: 400,
-        width: '100%',
-        borderColor: `${item.color}25`,
-      }}>
+    <div ref={ref} className="reveal" style={{ display: 'flex', justifyContent: isRight ? 'flex-end' : 'flex-start', paddingLeft: isRight ? '52%' : 0, paddingRight: isRight ? 0 : '52%', marginBottom: '3rem', position: 'relative' }}>
+      <div style={{ position: 'absolute', left: '50%', top: '1.5rem', transform: 'translate(-50%, -50%)', width: 14, height: 14, borderRadius: '50%', background: item.color, boxShadow: `0 0 16px ${item.color}, 0 0 32px ${item.color}80`, zIndex: 2, border: '2px solid var(--bg-dark)' }} />
+      <div style={{ position: 'absolute', left: isRight ? 'calc(50% - 90px)' : 'calc(50% + 16px)', top: '0.75rem', fontFamily: 'JetBrains Mono,monospace', fontWeight: 700, fontSize: '0.8rem', color: item.color, letterSpacing: '0.1em', padding: '0.25rem 0.75rem', background: `${item.color}15`, border: `1px solid ${item.color}40`, borderRadius: 100 }}>{item.year}</div>
+      <div className="neon-card" style={{ padding: '1.5rem', maxWidth: 400, width: '100%', borderColor: `${item.color}25` }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '0.75rem' }}>
-          <div style={{
-            width: 40, height: 40, borderRadius: 12,
-            background: `${item.color}15`,
-            border: `1px solid ${item.color}30`,
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: '1.2rem',
-          }}>{item.icon}</div>
+          <div style={{ width: 40, height: 40, borderRadius: 12, background: `${item.color}15`, border: `1px solid ${item.color}30`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem' }}>{item.icon}</div>
           <div>
-            <div style={{ fontFamily: 'Syne,sans-serif', fontWeight: 700, fontSize: '1rem', color: 'white' }}>
-              {item.title}
-            </div>
-            <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)', fontFamily: 'JetBrains Mono,monospace' }}>
-              {item.org}
-            </div>
+            <div style={{ fontFamily: 'Syne,sans-serif', fontWeight: 700, fontSize: '1rem', color: 'white' }}>{item.title}</div>
+            <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.4)', fontFamily: 'JetBrains Mono,monospace' }}>{item.org}</div>
           </div>
         </div>
-        <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.88rem', lineHeight: 1.75, marginBottom: '1rem' }}>
-          {item.desc}
-        </p>
+        <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.88rem', lineHeight: 1.75, marginBottom: '1rem' }}>{item.desc}</p>
         <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
           {item.tags.map(t => (
-            <span key={t} style={{
-              fontFamily: 'JetBrains Mono,monospace', fontSize: '0.68rem',
-              padding: '0.2rem 0.65rem', borderRadius: 100,
-              background: `${item.color}12`, color: item.color,
-              border: `1px solid ${item.color}35`,
-            }}>{t}</span>
+            <span key={t} style={{ fontFamily: 'JetBrains Mono,monospace', fontSize: '0.68rem', padding: '0.2rem 0.65rem', borderRadius: 100, background: `${item.color}12`, color: item.color, border: `1px solid ${item.color}35` }}>{t}</span>
           ))}
         </div>
       </div>
@@ -135,32 +83,14 @@ export default function Timeline() {
   }, []);
 
   return (
-    <section id="journey" className="mesh-bg py-28 px-6" style={{
-      background: 'linear-gradient(180deg,var(--bg-dark) 0%,#07071c 50%,var(--bg-dark) 100%)',
-      position: 'relative',
-    }}>
-      <div style={{
-        position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)',
-        width: 400, height: 400,
-        background: 'radial-gradient(circle,rgba(168,85,247,0.07) 0%,transparent 70%)',
-        filter: 'blur(80px)', pointerEvents: 'none',
-      }} />
-
+    <section id="journey" className="mesh-bg py-28 px-6" style={{ background: 'linear-gradient(180deg,var(--bg-dark) 0%,#07071c 50%,var(--bg-dark) 100%)', position: 'relative' }}>
+      <div style={{ position: 'absolute', top: '20%', left: '50%', transform: 'translateX(-50%)', width: 400, height: 400, background: 'radial-gradient(circle,rgba(168,85,247,0.07) 0%,transparent 70%)', filter: 'blur(80px)', pointerEvents: 'none' }} />
       <div className="max-w-5xl mx-auto">
         <div ref={titleRef} className="reveal text-center mb-20">
           <span className="section-label">// my journey</span>
-          <h2 style={{
-            fontFamily: 'Syne,sans-serif', fontSize: 'clamp(2rem,5vw,3.5rem)',
-            fontWeight: 800, letterSpacing: '-0.03em',
-          }}>
-            The <span className="gradient-text">Timeline</span>
-          </h2>
-          <p style={{ color: 'rgba(255,255,255,0.4)', marginTop: '0.75rem', fontSize: '0.95rem' }}>
-            Every great story has a beginning 📖
-          </p>
+          <h2 style={{ fontFamily: 'Syne,sans-serif', fontSize: 'clamp(2rem,5vw,3.5rem)', fontWeight: 800, letterSpacing: '-0.03em' }}>The <span className="gradient-text">Timeline</span></h2>
+          <p style={{ color: 'rgba(255,255,255,0.4)', marginTop: '0.75rem', fontSize: '0.95rem' }}>Every great story has a beginning 📖</p>
         </div>
-
-        {/* Timeline */}
         <div style={{ position: 'relative', paddingTop: '1rem' }}>
           <div className="timeline-line" />
           {items.map((item, i) => (

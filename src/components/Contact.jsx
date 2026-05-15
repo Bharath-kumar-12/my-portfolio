@@ -1,19 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 
-// ─────────────────────────────────────────────────────────
-//  🔑  EMAILJS CREDENTIALS
-//  Steps to get these:
-//  1. Go to https://www.emailjs.com and sign up (free)
-//  2. Add an Email Service  →  copy "Service ID"
-//  3. Create an Email Template →  copy "Template ID"
-//     Template variables to use: {{from_name}}, {{from_email}}, {{message}}
-//  4. Go to Account → API Keys → copy "Public Key"
-//  Then paste them below:
-// ─────────────────────────────────────────────────────────
-const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // e.g. 'service_abc123'
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // e.g. 'template_xyz789'
-const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';   // e.g. 'aBcDeFgHiJkLmNoP'
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';
 
 function useReveal(ref, delay = 0) {
   useEffect(() => {
@@ -56,52 +46,24 @@ const socials = [
   },
 ];
 
-// Status types: 'idle' | 'loading' | 'success' | 'error'
 function StatusBox({ status, onReset }) {
   if (status === 'idle') return null;
-
   const config = {
     loading: { icon: null, title: 'Sending...', msg: 'Hold on, sending your message to Bharath.', color: '#a855f7' },
     success: { icon: '✅', title: 'Message Sent!', msg: "You'll hear back within 24 hours. Thanks for reaching out 🚀", color: '#84cc16' },
     error:   { icon: '❌', title: 'Something went wrong', msg: 'Please try again, or email me directly at bharath@gmail.com', color: '#ec4899' },
   }[status];
-
   return (
-    <div style={{
-      height: '100%', minHeight: 260,
-      display: 'flex', flexDirection: 'column',
-      alignItems: 'center', justifyContent: 'center',
-      gap: 16, textAlign: 'center', padding: '1rem',
-    }}>
+    <div style={{ height: '100%', minHeight: 260, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 16, textAlign: 'center', padding: '1rem' }}>
       {status === 'loading' ? (
-        /* Spinner */
-        <div style={{
-          width: 56, height: 56, borderRadius: '50%',
-          border: '3px solid rgba(168,85,247,0.15)',
-          borderTopColor: '#a855f7',
-          animation: 'spin 0.9s linear infinite',
-        }} />
+        <div style={{ width: 56, height: 56, borderRadius: '50%', border: '3px solid rgba(168,85,247,0.15)', borderTopColor: '#a855f7', animation: 'spin 0.9s linear infinite' }} />
       ) : (
         <div style={{ fontSize: '3rem', lineHeight: 1 }}>{config.icon}</div>
       )}
-
-      <h3 style={{
-        fontFamily: 'Syne, sans-serif', fontWeight: 700, fontSize: '1.4rem',
-        color: config.color,
-      }}>
-        {config.title}
-      </h3>
-      <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem', maxWidth: 300 }}>
-        {config.msg}
-      </p>
+      <h3 style={{ fontFamily: 'Syne, sans-serif', fontWeight: 700, fontSize: '1.4rem', color: config.color }}>{config.title}</h3>
+      <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.9rem', maxWidth: 300 }}>{config.msg}</p>
       {(status === 'success' || status === 'error') && (
-        <button
-          onClick={onReset}
-          className="btn-neon btn-neon-outline"
-          style={{ marginTop: 8, fontSize: '0.85rem', padding: '0.6rem 1.5rem' }}
-        >
-          {status === 'success' ? 'Send Another' : 'Try Again'}
-        </button>
+        <button onClick={onReset} className="btn-neon btn-neon-outline" style={{ marginTop: 8, fontSize: '0.85rem', padding: '0.6rem 1.5rem' }}>{status === 'success' ? 'Send Another' : 'Try Again'}</button>
       )}
     </div>
   );
@@ -110,7 +72,7 @@ function StatusBox({ status, onReset }) {
 function Contact() {
   const titleRef = useRef(null);
   const formRef  = useRef(null);
-  const [status, setStatus] = useState('idle'); // idle | loading | success | error
+  const [status, setStatus] = useState('idle');
   const [form, setForm]     = useState({ name: '', email: '', message: '' });
   useReveal(titleRef);
   useReveal(formRef, 150);
@@ -118,21 +80,8 @@ function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus('loading');
-
-    const templateParams = {
-      from_name:  form.name,
-      from_email: form.email,
-      message:    form.message,
-      to_name:    'Bharath',   // your name (shows in email template)
-    };
-
     try {
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        templateParams,
-        EMAILJS_PUBLIC_KEY
-      );
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, { from_name: form.name, from_email: form.email, message: form.message, to_name: 'Bharath' }, EMAILJS_PUBLIC_KEY);
       setStatus('success');
       setForm({ name: '', email: '', message: '' });
     } catch (err) {
@@ -144,116 +93,37 @@ function Contact() {
   const handleReset = () => setStatus('idle');
 
   return (
-    <section
-      id="contact"
-      className="mesh-bg py-28 px-6"
-      style={{
-        background: 'linear-gradient(180deg, var(--bg-dark) 0%, #060618 50%, var(--bg-dark) 100%)',
-        position: 'relative',
-      }}
-    >
-      {/* Blob */}
-      <div style={{
-        position: 'absolute', top: '10%', right: '15%',
-        width: 350, height: 350,
-        background: 'radial-gradient(circle, rgba(236,72,153,0.1) 0%, transparent 70%)',
-        filter: 'blur(80px)', pointerEvents: 'none',
-      }} />
-
+    <section id="contact" className="mesh-bg py-28 px-6" style={{ background: 'linear-gradient(180deg, var(--bg-dark) 0%, #060618 50%, var(--bg-dark) 100%)', position: 'relative' }}>
+      <div style={{ position: 'absolute', top: '10%', right: '15%', width: 350, height: 350, background: 'radial-gradient(circle, rgba(236,72,153,0.1) 0%, transparent 70%)', filter: 'blur(80px)', pointerEvents: 'none' }} />
       <div className="max-w-6xl mx-auto">
         <div ref={titleRef} className="reveal text-center mb-16">
           <span className="section-label">// let's connect</span>
-          <h2 style={{
-            fontFamily: 'Syne, sans-serif', fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-            fontWeight: 800, letterSpacing: '-0.03em',
-          }}>
-            Get In <span className="gradient-text">Touch</span>
-          </h2>
-          <p style={{ color: 'rgba(255,255,255,0.4)', marginTop: '0.75rem', fontSize: '0.95rem' }}>
-            Got a project? Let's make something amazing together 🚀
-          </p>
+          <h2 style={{ fontFamily: 'Syne, sans-serif', fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 800, letterSpacing: '-0.03em' }}>Get In <span className="gradient-text">Touch</span></h2>
+          <p style={{ color: 'rgba(255,255,255,0.4)', marginTop: '0.75rem', fontSize: '0.95rem' }}>Got a project? Let's make something amazing together 🚀</p>
         </div>
-
         <div ref={formRef} className="reveal grid grid-cols-1 md:grid-cols-5 gap-8 max-w-5xl mx-auto">
-
-          {/* {Left info panel} */}
           <div className="md:col-span-2 flex flex-col gap-5">
-            {/* {Contact info card} */}
             <div className="neon-card" style={{ padding: '1.75rem', flex: 1 }}>
-              <h3 style={{ fontFamily: 'Syne, sans-serif', fontWeight: 700, fontSize: '1.2rem', marginBottom: '0.5rem' }}>
-                Let's build something great
-              </h3>
-              <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.9rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>
-                I'm always open to freelance projects, full-time opportunities, or just a friendly chat about tech and design.
-              </p>
-
+              <h3 style={{ fontFamily: 'Syne, sans-serif', fontWeight: 700, fontSize: '1.2rem', marginBottom: '0.5rem' }}>Let's build something great</h3>
+              <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: '0.9rem', lineHeight: 1.7, marginBottom: '1.5rem' }}>I'm always open to freelance projects, full-time opportunities, or just a friendly chat about tech and design.</p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {[
-                  { icon: '📧', label: 'bharath@gmail.com' },
-                  { icon: '📍', label: 'Chennai, India' },
-                  { icon: '🕐', label: 'Responds within 24h' },
-                ].map(({ icon, label }) => (
+                {[{ icon: '📧', label: 'bharath@gmail.com' }, { icon: '📍', label: 'Chennai, India' }, { icon: '🕐', label: 'Responds within 24h' }].map(({ icon, label }) => (
                   <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <div style={{
-                      width: 36, height: 36, borderRadius: 10,
-                      background: 'rgba(168,85,247,0.1)', border: '1px solid rgba(168,85,247,0.2)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      fontSize: '1rem', flexShrink: 0,
-                    }}>
-                      {icon}
-                    </div>
+                    <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(168,85,247,0.1)', border: '1px solid rgba(168,85,247,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1rem', flexShrink: 0 }}>{icon}</div>
                     <span style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.65)' }}>{label}</span>
                   </div>
                 ))}
               </div>
             </div>
-
-            {/* Social links */}
             <div className="neon-card" style={{ padding: '1.5rem' }}>
-              <div style={{
-                fontSize: '0.7rem', fontFamily: 'JetBrains Mono, monospace',
-                letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)',
-                textTransform: 'uppercase', marginBottom: '0.875rem',
-              }}>
-                Find me online
-              </div>
+              <div style={{ fontSize: '0.7rem', fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.15em', color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', marginBottom: '0.875rem' }}>Find me online</div>
               <div style={{ display: 'flex', gap: 10 }}>
                 {socials.map(social => (
-                  <a
-                    key={social.name}
-                    href={social.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    title={social.name}
-                    style={{
-                      width: 44, height: 44, borderRadius: 12,
-                      background: 'rgba(255,255,255,0.04)',
-                      border: '1px solid rgba(255,255,255,0.1)',
-                      display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      color: 'rgba(255,255,255,0.5)', transition: 'all 0.25s ease',
-                      textDecoration: 'none',
-                    }}
-                    onMouseEnter={e => {
-                      e.currentTarget.style.borderColor = `${social.color}80`;
-                      e.currentTarget.style.color = social.color;
-                      e.currentTarget.style.background = `${social.color}15`;
-                      e.currentTarget.style.boxShadow = `0 0 20px ${social.color}30`;
-                    }}
-                    onMouseLeave={e => {
-                      e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
-                      e.currentTarget.style.color = 'rgba(255,255,255,0.5)';
-                      e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
-                      e.currentTarget.style.boxShadow = 'none';
-                    }}
-                  >
-                    {social.icon}
-                  </a>
+                  <a key={social.name} href={social.href} target="_blank" rel="noreferrer" title={social.name} style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'rgba(255,255,255,0.5)', transition: 'all 0.25s ease', textDecoration: 'none' }} onMouseEnter={e => { e.currentTarget.style.borderColor = `${social.color}80`; e.currentTarget.style.color = social.color; e.currentTarget.style.background = `${social.color}15`; e.currentTarget.style.boxShadow = `0 0 20px ${social.color}30`; }} onMouseLeave={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = 'rgba(255,255,255,0.5)'; e.currentTarget.style.background = 'rgba(255,255,255,0.04)'; e.currentTarget.style.boxShadow = 'none'; }}>{social.icon}</a>
                 ))}
               </div>
             </div>
           </div>
-
-          {/* ── Contact Form ── */}
           <div className="neon-card md:col-span-3" style={{ padding: '2rem' }}>
             {status !== 'idle' ? (
               <StatusBox status={status} onReset={handleReset} />
@@ -261,70 +131,27 @@ function Contact() {
               <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', display: 'block', marginBottom: '0.5rem', fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.08em' }}>
-                      YOUR NAME
-                    </label>
-                    <input
-                      type="text" required className="neon-input"
-                      placeholder="Bharath"
-                      value={form.name}
-                      onChange={e => setForm({ ...form, name: e.target.value })}
-                    />
+                    <label style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', display: 'block', marginBottom: '0.5rem', fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.08em' }}>YOUR NAME</label>
+                    <input type="text" required className="neon-input" placeholder="Bharath" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} />
                   </div>
                   <div>
-                    <label style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', display: 'block', marginBottom: '0.5rem', fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.08em' }}>
-                      YOUR EMAIL
-                    </label>
-                    <input
-                      type="email" required className="neon-input"
-                      placeholder="bharath@gmail.com"
-                      value={form.email}
-                      onChange={e => setForm({ ...form, email: e.target.value })}
-                    />
+                    <label style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', display: 'block', marginBottom: '0.5rem', fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.08em' }}>YOUR EMAIL</label>
+                    <input type="email" required className="neon-input" placeholder="bharath@gmail.com" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
                   </div>
                 </div>
-
                 <div>
-                  <label style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', display: 'block', marginBottom: '0.5rem', fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.08em' }}>
-                    YOUR MESSAGE
-                  </label>
-                  <textarea
-                    required rows={5} className="neon-input"
-                    placeholder="Hi Bharath, I'd love to work with you on..."
-                    value={form.message}
-                    onChange={e => setForm({ ...form, message: e.target.value })}
-                    style={{ resize: 'vertical', minHeight: 120 }}
-                  />
+                  <label style={{ fontSize: '0.78rem', color: 'rgba(255,255,255,0.5)', display: 'block', marginBottom: '0.5rem', fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.08em' }}>YOUR MESSAGE</label>
+                  <textarea required rows={5} className="neon-input" placeholder="Hi Bharath, I'd love to work with you on..." value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} style={{ resize: 'vertical', minHeight: 120 }} />
                 </div>
-
-                <button
-                  type="submit"
-                  className="btn-neon btn-neon-primary"
-                  style={{ width: '100%', textAlign: 'center' }}
-                >
-                  Send Message 🚀
-                </button>
-
-                {/* EmailJS not configured yet — show warning */}
+                <button type="submit" className="btn-neon btn-neon-primary" style={{ width: '100%', textAlign: 'center' }}>Send Message 🚀</button>
                 {EMAILJS_SERVICE_ID === 'YOUR_SERVICE_ID' && (
-                  <p style={{
-                    textAlign: 'center', fontSize: '0.72rem',
-                    color: '#f59e0b', fontFamily: 'JetBrains Mono, monospace',
-                    background: 'rgba(245,158,11,0.08)',
-                    border: '1px solid rgba(245,158,11,0.2)',
-                    borderRadius: 10, padding: '0.5rem 1rem',
-                  }}>
-                    {/* Warning wrapper */}
-                    {"⚠️ EmailJS not configured yet. Add your keys to Contact.jsx"}
-                  </p>
+                  <p style={{ textAlign: 'center', fontSize: '0.72rem', color: '#f59e0b', fontFamily: 'JetBrains Mono, monospace', background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.2)', borderRadius: 10, padding: '0.5rem 1rem' }}>⚠️ EmailJS not configured yet. Add your keys to Contact.jsx</p>
                 )}
               </form>
             )}
           </div>
         </div>
       </div>
-
-      {/* Spinner keyframe injected inline */}
       <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
     </section>
   );

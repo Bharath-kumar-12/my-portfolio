@@ -176,14 +176,10 @@ function About() {
         </div>
 
         <div ref={textRef} className="reveal grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-
-          {/* Left: photo + clock */}
           <div style={{display:'flex',flexDirection:'column',alignItems:'center',gap:24}}>
             <TiltPhoto/>
             <LiveClock/>
           </div>
-
-          {/* Right: text */}
           <div>
             <h3 style={{fontFamily:'Syne,sans-serif',fontSize:'1.75rem',fontWeight:700,marginBottom:'1rem'}}>
               Hi, I'm Bharath 👋
@@ -197,7 +193,6 @@ function About() {
               always pushing boundaries to build interfaces that feel truly alive. 🚀
             </p>
 
-            {/* info grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3" style={{marginBottom:'2rem'}}>
               {info.map(({icon,label,value})=>(
                 <div key={label} className="neon-card"

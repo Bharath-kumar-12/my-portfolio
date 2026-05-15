@@ -49,7 +49,6 @@ function RadarChart() {
     const N=skills.length;
     ctx.clearRect(0,0,W,W);
 
-    // grid rings
     for(let r=0.25;r<=1;r+=0.25){
       ctx.beginPath();
       for(let i=0;i<N;i++){
@@ -62,7 +61,6 @@ function RadarChart() {
       ctx.lineWidth=1;ctx.stroke();
     }
 
-    // spoke lines
     for(let i=0;i<N;i++){
       const ang=-Math.PI/2+i*(Math.PI*2/N);
       ctx.beginPath();
@@ -72,7 +70,6 @@ function RadarChart() {
       ctx.lineWidth=1;ctx.stroke();
     }
 
-    // data polygon
     const eased = progress<0.5?2*progress*progress:1-Math.pow(-2*progress+2,2)/2;
     ctx.beginPath();
     skills.forEach((sk,i)=>{
@@ -90,19 +87,14 @@ function RadarChart() {
     ctx.strokeStyle='rgba(168,85,247,0.7)';
     ctx.lineWidth=1.5;ctx.stroke();
 
-    // dots + labels
     skills.forEach((sk,i)=>{
       const ang=-Math.PI/2+i*(Math.PI*2/N);
       const r2=(sk.level/100)*R*eased;
       const x=cx+r2*Math.cos(ang),y=cy+r2*Math.sin(ang);
-
-      // dot
       ctx.beginPath();ctx.arc(x,y,4,0,Math.PI*2);
       ctx.fillStyle=sk.color;
       ctx.shadowColor=sk.color;ctx.shadowBlur=10;
       ctx.fill();ctx.shadowBlur=0;
-
-      // label
       const lx=cx+(R+24)*Math.cos(ang),ly=cy+(R+24)*Math.sin(ang);
       ctx.font=`600 10px "Space Grotesk",sans-serif`;
       ctx.fillStyle='rgba(255,255,255,0.65)';
@@ -127,7 +119,6 @@ function RadarChart() {
   );
 }
 
-/* ─── Skill Bar Card ─────────────────────────────────── */
 function SkillBar({skill, delay}) {
   const ref=useRef(null);
   const barRef=useRef(null);
@@ -211,15 +202,11 @@ function Skills() {
           </p>
         </div>
 
-        {/* Two-column: radar + bars */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mb-12">
-
-          {/* Radar chart */}
           <div className="neon-card flex items-center justify-center" style={{padding:'2rem'}}>
             <RadarChart/>
           </div>
 
-          {/* Bar cards */}
           <div className="grid grid-cols-2 gap-3">
             {skills.map((sk,i)=>(
               <SkillBar key={sk.name} skill={sk} delay={i*60}/>
@@ -227,7 +214,6 @@ function Skills() {
           </div>
         </div>
 
-        {/* Tools row */}
         <div ref={toolsRef} className="reveal neon-card" style={{padding:'2rem'}}>
           <h3 style={{
             fontFamily:'JetBrains Mono,monospace',fontSize:'0.72rem',
