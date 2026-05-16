@@ -50,10 +50,10 @@ function TimelineCard({ item, idx }) {
   const isRight = item.side === 'right';
 
   return (
-    <div ref={ref} className="reveal" style={{ display: 'flex', justifyContent: isRight ? 'flex-end' : 'flex-start', paddingLeft: isRight ? '52%' : 0, paddingRight: isRight ? 0 : '52%', marginBottom: '3rem', position: 'relative' }}>
-      <div style={{ position: 'absolute', left: '50%', top: '1.5rem', transform: 'translate(-50%, -50%)', width: 14, height: 14, borderRadius: '50%', background: item.color, boxShadow: `0 0 16px ${item.color}, 0 0 32px ${item.color}80`, zIndex: 2, border: '2px solid var(--bg-dark)' }} />
-      <div style={{ position: 'absolute', left: isRight ? 'calc(50% - 90px)' : 'calc(50% + 16px)', top: '0.75rem', fontFamily: 'JetBrains Mono,monospace', fontWeight: 700, fontSize: '0.8rem', color: item.color, letterSpacing: '0.1em', padding: '0.25rem 0.75rem', background: `${item.color}15`, border: `1px solid ${item.color}40`, borderRadius: 100 }}>{item.year}</div>
-      <div className="neon-card" style={{ padding: '1.5rem', maxWidth: 400, width: '100%', borderColor: `${item.color}25` }}>
+    <div ref={ref} className={`reveal timeline-item ${isRight ? 'timeline-right' : 'timeline-left'}`}>
+      <div className="timeline-dot" style={{ background: item.color, boxShadow: `0 0 16px ${item.color}, 0 0 32px ${item.color}80` }} />
+      <div className="timeline-year" style={{ color: item.color, background: `${item.color}15`, border: `1px solid ${item.color}40` }}>{item.year}</div>
+      <div className="neon-card timeline-card" style={{ borderColor: `${item.color}25` }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: '0.75rem' }}>
           <div style={{ width: 40, height: 40, borderRadius: 12, background: `${item.color}15`, border: `1px solid ${item.color}30`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.2rem' }}>{item.icon}</div>
           <div>

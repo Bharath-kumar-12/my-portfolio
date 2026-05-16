@@ -191,7 +191,7 @@ function CodeRain() {
     draw();
     return ()=>cancelAnimationFrame(id);
   },[]);
-  return <canvas ref={cvs} style={{
+  return <canvas ref={cvs} className="hidden lg:block" style={{
     position:'absolute',right:0,top:0,width:420,height:'100%',
     opacity:.2,pointerEvents:'none',zIndex:1,
     maskImage:'linear-gradient(to right,transparent,rgba(0,0,0,0.7) 40%,black)',
@@ -286,8 +286,8 @@ function Globe() {
     return ()=>cancelAnimationFrame(animId);
   },[]);
   return (
-    <div style={{position:'relative',display:'inline-block'}}>
-      <canvas ref={cvs} style={{cursor:'grab',borderRadius:'50%',display:'block'}}/>
+    <div style={{position:'relative',display:'inline-block',maxWidth:'100%'}}>
+      <canvas ref={cvs} style={{cursor:'grab',borderRadius:'50%',display:'block',width:'100%',maxWidth:'360px',height:'auto',aspectRatio:'1/1'}}/>
       <div style={{position:'absolute',bottom:14,left:'50%',transform:'translateX(-50%)',fontFamily:'JetBrains Mono,monospace',fontSize:'0.65rem',color:'rgba(255,255,255,0.3)',letterSpacing:'0.14em',whiteSpace:'nowrap'}}>
         ← drag to rotate →
       </div>
